@@ -9,25 +9,25 @@ trigger:
 jobs:
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN64 --debug
+    command: VC-WIN64A --debug
     vcvars: -arch=amd64
     name: Windows_Debug_x64
 
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN64
+    command: VC-WIN64A
     vcvars: -arch=amd64
     name: Windows_Release_x64
 
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN64-UWP --debug
+    command: VC-WIN64A-UWP --debug
     vcvars: -arch=amd64 -app_platform=UWP
     name: UWP_Debug_x64
 
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN64-UWP
+    command: VC-WIN64A-UWP
     vcvars: -arch=amd64 -app_platform=UWP
     name: UWP_Release_x64
 
