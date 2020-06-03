@@ -35,16 +35,16 @@ jobs:
       nmake
     displayName: 'Build'
 
-- task: CopyFiles@2
-  displayName: Move Build Artifacts
-  inputs:
-    sourceFolder: submodules\openssl
-    contents: '(libcrypto.lib|libssl.lib)'
-    targetFolder: $(Build.ArtifactStagingDirectory)
+  - task: CopyFiles@2
+    displayName: Move Build Artifacts
+    inputs:
+      sourceFolder: submodules\openssl
+      contents: '(libcrypto.lib|libssl.lib)'
+      targetFolder: $(Build.ArtifactStagingDirectory)
 
-- task: PublishBuildArtifacts@1
-  displayName: Upload Build Artifacts
-  inputs:
-    artifactName: drop
-    pathToPublish: $(Build.ArtifactStagingDirectory)
-    parallel: true
+  - task: PublishBuildArtifacts@1
+    displayName: Upload Build Artifacts
+    inputs:
+      artifactName: drop
+      pathToPublish: $(Build.ArtifactStagingDirectory)
+      parallel: true
