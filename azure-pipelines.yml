@@ -10,5 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- script: perl Configure --debug VC-WIN32 no-shared
+- script: |
+    cd submodules\openssl
+    perl Configure --debug VC-WIN32 no-shared
   displayName: 'Run a one-line script'
