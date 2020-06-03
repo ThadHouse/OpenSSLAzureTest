@@ -10,12 +10,26 @@ jobs:
 - template: ./templates/job-build.yml
   parameters:
     command: VC-WIN64 --debug
+    vcvars: -arch=amd64
     name: Windows_Debug_x64
 
 - template: ./templates/job-build.yml
   parameters:
     command: VC-WIN64
+    vcvars: -arch=amd64
     name: Windows_Release_x64
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN64-UWP --debug
+    vcvars: -arch=amd64 -app_platform=UWP
+    name: UWP_Debug_x64
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN64-UWP
+    vcvars: -arch=amd64 -app_platform=UWP
+    name: UWP_Release_x64
 
 - template: ./templates/job-build.yml
   parameters:
@@ -26,3 +40,15 @@ jobs:
   parameters:
     command: VC-WIN32
     name: Windows_Release_x32
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN32-UWP --debug
+    vcvars: -app_platform=UWP
+    name: UWP_Debug_x32
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN32-UWP
+    vcvars: -app_platform=UWP
+    name: UWP_Release_x32
