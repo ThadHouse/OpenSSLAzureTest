@@ -13,8 +13,25 @@ steps:
 - checkout: self
   submodules: recursive
 
+- powershell: |
+    mkdir build
+    $ProgressPreference = 'SilentlyContinue'
+    wget "https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-win64.zip" -O "nasm.zip"
+  displayName: 'Download NASM'
+
+- task: ExtractFiles@1
+  inputs:
+    archiveFilePatterns: '*.zip'
+    destinationFolder: 'build'
+
 - script: |
+    dir
+    cd build
+    dir
+    cd ..
     cd submodules\openssl
+    SET PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\build\nasm
+    echo %PATH%
     pwd
     perl Configure --debug VC-WIN32 no-shared
   displayName: 'Run a one-line script'
