@@ -21,17 +21,11 @@ steps:
 
 - task: ExtractFiles@1
   inputs:
-    archiveFilePatterns: '*.zip'
     destinationFolder: 'build'
 
 - script: |
-    dir
-    cd build
-    dir
-    cd ..
     cd submodules\openssl
-    SET PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\build\nasm
-    echo %PATH%
+    SET PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\build\nasm-2.14.02
     pwd
     perl Configure --debug VC-WIN32 no-shared
   displayName: 'Run a one-line script'
