@@ -47,6 +47,6 @@ jobs:
   - task: PublishBuildArtifacts@1
     displayName: Upload Build Artifacts
     inputs:
-      artifactName: drop
+      artifactName: ${{ parameters.name }}
       pathToPublish: $(Build.ArtifactStagingDirectory)
       parallel: true
