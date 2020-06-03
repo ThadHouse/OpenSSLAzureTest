@@ -10,8 +10,8 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- checkout: 'self'
-  submodules: true
+- checkout: self
+  submodules: recursive
 
 - script: |
     cd submodules\openssl
