@@ -34,3 +34,17 @@ jobs:
       call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat ${{ parameters.vcvars }}
       nmake
     displayName: 'Build'
+
+- task: CopyFiles@2
+  displayName: Move Build Artifacts
+  inputs:
+    sourceFolder: submodules\openssl
+    contents: '(libcrypto.lib|libssl.lib)'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  displayName: Upload Build Artifacts
+  inputs:
+    artifactName: drop
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    parallel: true
