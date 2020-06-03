@@ -1,5 +1,6 @@
 parameters:
   command: ''
+  vcvars: ''
   name: ''
 
 
@@ -26,8 +27,10 @@ jobs:
   - script: |
       cd submodules\openssl
       SET PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\build\nasm-2.14.02
-      pwd
-      perl Configure no-shared ${{ parameters.command }}
-      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat
+
+      echo ${{ parameters.command }}
+
+      perl Configure ${{ parameters.command }} no-shared
+      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat ${{ parameters.vcvars }}
       nmake
     displayName: 'Build'

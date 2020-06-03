@@ -16,3 +16,13 @@ jobs:
   parameters:
     command: VC-WIN64
     name: Windows_Release_x64
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN32 --debug
+    name: Windows_Debug_x32
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN32
+    name: Windows_Release_x32
