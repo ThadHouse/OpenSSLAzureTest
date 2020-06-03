@@ -6,28 +6,13 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'windows-latest'
+jobs:
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN64 --debug
+    name: Windows_Debug_x64
 
-steps:
-- checkout: self
-  submodules: recursive
-
-- powershell: |
-    mkdir build
-    $ProgressPreference = 'SilentlyContinue'
-    wget "https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-win64.zip" -O "nasm.zip"
-  displayName: 'Download NASM'
-
-- task: ExtractFiles@1
-  inputs:
-    destinationFolder: 'build'
-
-- script: |
-    cd submodules\openssl
-    SET PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\build\nasm-2.14.02
-    pwd
-    perl Configure --debug VC-WIN32 no-shared
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat
-    nmake
-  displayName: 'Run a one-line script'
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN64
+    name: Windows_Release_x64

@@ -1,0 +1,33 @@
+parameters:
+  command: ''
+  name: ''
+
+
+jobs:
+- job: build_${{ parameters.name }}
+
+  pool:
+    vmImage: 'windows-2019'
+  
+  steps:
+  - checkout: self
+    submodules: recursive
+
+  - powershell: |
+      mkdir build
+      $ProgressPreference = 'SilentlyContinue'
+      wget "https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/nasm-2.14.02-win64.zip" -O "nasm.zip"
+    displayName: 'Download NASM'
+
+  - task: ExtractFiles@1
+    inputs:
+      destinationFolder: 'build'
+
+  - script: |
+      cd submodules\openssl
+      SET PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\build\nasm-2.14.02
+      pwd
+      perl Configure no-shared ${{ parameters.command }}
+      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat
+      nmake
+    displayName: 'Build'
