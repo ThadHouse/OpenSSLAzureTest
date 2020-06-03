@@ -28,4 +28,5 @@ steps:
     SET PATH=%PATH%;%BUILD_SOURCESDIRECTORY%\build\nasm-2.14.02
     pwd
     perl Configure --debug VC-WIN32 no-shared
+    nmake
   displayName: 'Run a one-line script'
