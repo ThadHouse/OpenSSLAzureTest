@@ -34,25 +34,49 @@ jobs:
 - template: ./templates/job-build.yml
   parameters:
     command: VC-WIN32-ARM --debug no-shared
-    vcvars: -arch=x86_arm -app_platform=onecore
-    name: Onecore_Debug_Arm32
+    vcvars: -arch=x64_arm -app_platform=onecore
+    name: Windows_Debug_Arm32
 
 - template: ./templates/job-build.yml
   parameters:
     command: VC-WIN32-ARM no-shared
-    vcvars: -arch=x86_arm -app_platform=onecore
+    vcvars: -arch=x64_arm -app_platform=onecore
+    name: Windows_Release_Arm32
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN32-ARM --debug
+    vcvars: -arch=x64_arm -app_platform=onecore
+    name: Onecore_Debug_Arm32
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN32-ARM
+    vcvars: -arch=x64_arm -app_platform=onecore
     name: Onecore_Release_Arm32
 
 - template: ./templates/job-build.yml
   parameters:
+    command: VC-WIN64-ARM --debug no-shared
+    vcvars: -arch=x64_arm64 -app_platform=onecore
+    name: Windows_Debug_Arm64
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN64-ARM no-shared
+    vcvars: -arch=x64_arm64 -app_platform=onecore
+    name: Windows_Release_Arm64
+
+- template: ./templates/job-build.yml
+  parameters:
     command: VC-WIN64-ARM --debug
-    vcvars: -arch=x86_arm64 -app_platform=onecore
+    vcvars: -arch=x64_arm64 -app_platform=onecore
     name: Onecore_Debug_Arm64
 
 - template: ./templates/job-build.yml
   parameters:
     command: VC-WIN64-ARM
-    vcvars: -arch=x86_arm64 -app_platform=onecore
+    vcvars: -arch=x64_arm64 -app_platform=onecore
     name: Onecore_Release_Arm64
 
 - template: ./templates/job-build.yml
