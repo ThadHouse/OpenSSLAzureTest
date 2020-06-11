@@ -9,27 +9,51 @@ trigger:
 jobs:
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN64A --debug
-    vcvars: -arch=amd64 no-shared
+    command: VC-WIN64A --debug no-shared
+    vcvars: -arch=amd64 
     name: Windows_Debug_x64
 
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN64A
-    vcvars: -arch=amd64 no-shared
+    command: VC-WIN64A no-shared
+    vcvars: -arch=amd64 
     name: Windows_Release_x64
 
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN64A-UWP --debug
-    vcvars: -arch=amd64 -app_platform=UWP
-    name: UWP_Debug_x64
+    command: VC-WIN64A-ONECORE --debug
+    vcvars: -arch=amd64 -app_platform=onecore
+    name: Onecore_Debug_x64
 
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN64A-UWP
-    vcvars: -arch=amd64 -app_platform=UWP
-    name: UWP_Release_x64
+    command: VC-WIN64A-ONECORE
+    vcvars: -arch=amd64 -app_platform=onecore
+    name: Onecore_Release_x64
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN32-ARM --debug no-shared
+    vcvars: -arch=x86_arm -app_platform=onecore
+    name: Onecore_Debug_Arm32
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN32-ARM no-shared
+    vcvars: -arch=x86_arm -app_platform=onecore
+    name: Onecore_Release_Arm32
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN64-ARM --debug
+    vcvars: -arch=x86_arm64 -app_platform=onecore
+    name: Onecore_Debug_Arm64
+
+- template: ./templates/job-build.yml
+  parameters:
+    command: VC-WIN64-ARM
+    vcvars: -arch=x86_arm64 -app_platform=onecore
+    name: Onecore_Release_Arm64
 
 - template: ./templates/job-build.yml
   parameters:
@@ -43,12 +67,12 @@ jobs:
 
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN32-UWP --debug
-    vcvars: -app_platform=UWP
-    name: UWP_Debug_x32
+    command: VC-WIN32-ONECORE --debug
+    vcvars: -app_platform=onecore
+    name: Onecore_Debug_x32
 
 - template: ./templates/job-build.yml
   parameters:
-    command: VC-WIN32-UWP
-    vcvars: -app_platform=UWP
-    name: UWP_Release_x32
+    command: VC-WIN32-ONECORE
+    vcvars: -app_platform=onecore
+    name: Onecore_Release_x32
